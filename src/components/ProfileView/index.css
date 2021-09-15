@@ -1,0 +1,11 @@
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  background-image: url('https://assets.ccbp.in/frontend/react-js/profile-bg.png');
+  flex-wrap: wrap;
+  background-size: cover;
+}
+.profile-image {
+  height: 150px;
+  width: 150px;
+}

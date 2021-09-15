@@ -1,0 +1,84 @@
+.detailed-view-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #000000;
+  min-height: 100vh;
+}
+.detailed-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #202020;
+  margin: 35px;
+  border-radius: 15px;
+}
+.card-details {
+  display: flex;
+  margin-left: 30px;
+}
+.company-logo {
+  height: 60px;
+  width: 100px;
+  align-self: center;
+}
+.description-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.des-page {
+  display: flex;
+  justify-content: space-between;
+}
+.link-element {
+  color: blue;
+  font-size: 32px;
+}
+.skills-list {
+  display: flex;
+  list-style-type: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.skill-item {
+  display: flex;
+  margin: 15px;
+  width: 30%;
+}
+.skill-image {
+  width: 100px;
+}
+.skill-head {
+  color: #fff;
+  align-self: center;
+}
+.life-at-company {
+  display: flex;
+}
+.description {
+  color: #fff;
+  flex-wrap: wrap;
+}
+.similar-jobs {
+  display: flex;
+  list-style-type: none;
+}
+.job-item {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: #202020;
+  margin: 15px;
+  border-radius: 15px;
+}
+.title-and-rating {
+  display: flex;
+  flex-direction: column;
+}
+.image-heading {
+  display: flex;
+}
+.failure-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #000000;
+}

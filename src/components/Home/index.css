@@ -1,0 +1,25 @@
+.home-tab {
+  display: flex;
+  background-image: url('https://assets.ccbp.in/frontend/react-js/home-lg-bg.png');
+  min-height: 100vh;
+  background-size: cover;
+  flex-direction: column;
+}
+.home-container {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  flex-wrap: wrap;
+  margin-left: 30px;
+}
+.heading {
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 60px;
+}
+.para {
+  color: #ffffff;
+}
+.button {
+  width: 150px;
+}

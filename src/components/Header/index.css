@@ -1,0 +1,31 @@
+.header-container {
+  display: flex;
+  background-color: #202020;
+  justify-content: space-around;
+}
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.logo {
+  height: 32px;
+}
+.nav-items {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+}
+.home {
+  margin-right: 10px;
+  list-style-type: none;
+  color: #fff;
+  text-decoration: none;
+}
+.jobs {
+  margin-right: 10px;
+  list-style-type: none;
+  color: #fff;
+  text-decoration: none;
+}

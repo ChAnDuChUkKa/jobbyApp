@@ -1,0 +1,41 @@
+.job-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #000000;
+}
+.profile-and-jobs-container {
+  display: flex;
+}
+.side-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 25%;
+  margin: 20px;
+}
+.jobs-list {
+  margin: 20px;
+}
+.list-of-jobs {
+  list-style-type: none;
+}
+.searchBar {
+  display: flex;
+  margin-left: 25px;
+  border-color: #fff;
+  border-width: 2px;
+  background-color: transparent;
+  min-width: 35%;
+}
+.search-bar {
+  margin-left: 25px;
+  border-color: #fff;
+  border-width: 2px;
+  background-color: transparent;
+  min-width: 35%;
+  color: #fff;
+}
+.search-icon {
+  background-color: transparent;
+  color: #fff;
+}
