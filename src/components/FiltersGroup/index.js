@@ -26,7 +26,7 @@ const FilterGroups = props => {
   }
   const renderEmployment = () => (
     <>
-      <p className="employment-heading">Type of Employment</p>
+      <h1 className="employment-heading">Type of Employment</h1>
       <ul className="list-categories">{renderEmploymentCategories()}</ul>
     </>
   )
@@ -53,7 +53,7 @@ const FilterGroups = props => {
 
   const renderSalaryRange = () => (
     <>
-      <p className="employment-heading">Salary Range</p>
+      <h1 className="employment-heading">Salary Range</h1>
       <ul className="list-categories">{renderSalaryRangesList()}</ul>
     </>
   )

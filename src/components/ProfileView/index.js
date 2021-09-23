@@ -6,7 +6,7 @@ const ProfileView = props => {
   return (
     <div className="profile-section">
       <img src={profileImage} alt="profile" className="profile-image" />
-      <p className="name">{name}</p>
+      <h1 className="name">{name}</h1>
       <p className="bio">{shortBio}</p>
     </div>
   )
