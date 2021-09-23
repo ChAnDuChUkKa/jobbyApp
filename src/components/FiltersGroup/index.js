@@ -26,7 +26,7 @@ const FilterGroups = props => {
   }
   const renderEmployment = () => (
     <>
-      <p className="employment-heading">Types of Employment</p>
+      <p className="employment-heading">Type of Employment</p>
       <ul className="list-categories">{renderEmploymentCategories()}</ul>
     </>
   )

@@ -60,7 +60,6 @@ const appConstants = {
 class Jobs extends Component {
   state = {
     searchInput: '',
-    status: appConstants.initial,
     activeEmployment: [],
     activeSalaryRange: '',
     profileSection: [],
@@ -75,24 +74,21 @@ class Jobs extends Component {
 
   getFullView = async () => {
     this.setState({
-      status: appConstants.inProgress,
       jobStatus: appConstants.inProgress,
       profileStatus: appConstants.inProgress,
     })
     const jwtToken = Cookies.get('jwt_token')
     const {searchInput, activeEmployment, activeSalaryRange} = this.state
     const joinEmploymentType = activeEmployment.join(',')
-    const profileUrl = 'https://apis.ccbp.in/profile'
-    const jobsUrl = `https://apis.ccbp.in/jobs?employment_type=${joinEmploymentType}&minimum_package=${activeSalaryRange}&search=${searchInput}`
-    console.log(jobsUrl)
+    const profileApiUrl = 'https://apis.ccbp.in/profile'
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
       method: 'GET',
     }
-    const profileResponse = await fetch(profileUrl, options)
-    const jobsResponse = await fetch(jobsUrl, options)
+    const profileResponse = await fetch(profileApiUrl, options)
+
     if (profileResponse.ok) {
       const data = await profileResponse.json()
       const formattedProfileData = {
@@ -101,13 +97,16 @@ class Jobs extends Component {
         shortBio: data.profile_details.short_bio,
       }
       this.setState({
-        status: appConstants.success,
         profileSection: formattedProfileData,
+        profileStatus: appConstants.success,
       })
     } else {
-      this.setState({status: appConstants.failure})
+      this.setState({profileStatus: appConstants.failure})
     }
 
+    const jobsApiUrl = `https://apis.ccbp.in/jobs?employment_type=${joinEmploymentType}&minimum_package=${activeSalaryRange}&search=${searchInput}`
+    console.log(jobsApiUrl)
+    const jobsResponse = await fetch(jobsApiUrl, options)
     if (jobsResponse.ok) {
       const jobData = await jobsResponse.json()
       const formattedData = jobData.jobs.map(eachJob => ({
@@ -123,12 +122,11 @@ class Jobs extends Component {
 
       this.setState({
         jobsList: formattedData,
-        status: appConstants.success,
+        jobStatus: appConstants.success,
       })
     } else {
       this.setState({
         jobStatus: appConstants.failure,
-        status: appConstants.failure,
       })
     }
   }
@@ -168,41 +166,23 @@ class Jobs extends Component {
     )
     const isPresent = jobsList.length > 0
     return isPresent ? (
-      <div className="jobs-list">
-        <div className="searchBar">
-          <input
-            type="search"
-            value={searchInput}
-            onChange={this.changeInput}
-            placeholder="search"
-            className="search-bar"
-          />
-          <button
-            type="button"
-            testid="searchButton"
-            onClick={this.searchOutput}
-          >
-            <BsSearch className="search-icon" />
-          </button>
-        </div>
-        <ul className="list-of-jobs">
-          {filteredSearch.map(eachJob => (
-            <JobItem jobDetails={eachJob} key={eachJob.id} />
-          ))}
-        </ul>
-      </div>
+      <ul className="list-of-jobs">
+        {filteredSearch.map(eachJob => (
+          <JobItem jobDetails={eachJob} key={eachJob.id} />
+        ))}
+      </ul>
     ) : (
       this.renderNoView()
     )
   }
 
   renderJobs = () => {
-    const {status} = this.state
-    switch (status) {
+    const {jobStatus} = this.state
+    switch (jobStatus) {
       case appConstants.success:
         return this.renderJobsList()
       case appConstants.failure:
-        return this.renderFailureView()
+        return this.renderFailure()
       case appConstants.inProgress:
         return this.renderLoader()
       default:
@@ -241,15 +221,34 @@ class Jobs extends Component {
     }
   }
 
+  renderProfileView = () => {
+    const {profileSection} = this.state
+    return <ProfileView profileDetails={profileSection} />
+  }
+
+  renderProfile = () => {
+    const {profileStatus} = this.state
+    switch (profileStatus) {
+      case appConstants.success:
+        return this.renderProfileView()
+      case appConstants.failure:
+        return this.renderFailure()
+      case appConstants.inProgress:
+        return this.renderLoader()
+      default:
+        return null
+    }
+  }
+
   render() {
-    const {activeEmployment, activeSalaryRange, profileSection} = this.state
+    const {activeEmployment, activeSalaryRange, searchInput} = this.state
     console.log(activeSalaryRange)
     return (
       <div className="job-container">
         <Header />
         <div className="profile-and-jobs-container">
           <div className="side-container">
-            <ProfileView profileDetails={profileSection} />
+            {this.renderProfile()}
             <FiltersGroup
               employment={activeEmployment}
               salary={activeSalaryRange}
@@ -259,7 +258,26 @@ class Jobs extends Component {
               salaryRangesList={salaryRangesList}
             />
           </div>
-          {this.renderJobs()}
+          <div className="search-and-jobs">
+            <div className="searchBar">
+              <input
+                type="search"
+                value={searchInput}
+                onChange={this.changeInput}
+                placeholder="search"
+                className="search-bar"
+              />
+              <button
+                type="button"
+                testid="searchButton"
+                onClick={this.searchOutput}
+                className="search-button"
+              >
+                <BsSearch className="search-icon" />
+              </button>
+            </div>
+            {this.renderJobs()}
+          </div>
         </div>
       </div>
     )

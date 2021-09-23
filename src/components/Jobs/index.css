@@ -34,8 +34,17 @@
   background-color: transparent;
   min-width: 35%;
   color: #fff;
+  margin-top: 15px;
 }
 .search-icon {
   background-color: transparent;
   color: #fff;
+}
+.search-button {
+  margin-top: 15px;
+  background-color: transparent;
+}
+.search-and-jobs {
+  display: flex;
+  flex-direction: column;
 }

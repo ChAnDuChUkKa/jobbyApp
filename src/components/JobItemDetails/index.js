@@ -23,7 +23,7 @@ class JobItemDetails extends Component {
     const {match} = this.props
     const {params} = match
     const {id} = params
-    const apiUrl = `https://apis.ccbp.in/jobs/${id}`
+    const jobDetailsApiUrl = `https://apis.ccbp.in/jobs/${id}`
     const jwtToken = Cookies.get('jwt_token')
     const options = {
       headers: {
@@ -31,7 +31,7 @@ class JobItemDetails extends Component {
       },
       method: 'GET',
     }
-    const detailedResponse = await fetch(apiUrl, options)
+    const detailedResponse = await fetch(jobDetailsApiUrl, options)
     if (detailedResponse.ok) {
       const detailedData = await detailedResponse.json()
       console.log(detailedData)
@@ -84,7 +84,7 @@ class JobItemDetails extends Component {
       <p className="warning">
         We cannot seem to find the page you are looking for
       </p>
-      <button type="button" onClick={this.retry}>
+      <button type="button" onClick={this.retry} className="retry-button">
         Retry
       </button>
     </div>
@@ -101,7 +101,7 @@ class JobItemDetails extends Component {
     const {skills} = jobData
     console.log(skills)
     return skills.map(eachSkill => (
-      <li className="skill-item">
+      <li className="skill-item" key={eachSkill.name}>
         <img
           src={eachSkill.skillImage}
           alt={eachSkill.name}
@@ -116,7 +116,7 @@ class JobItemDetails extends Component {
     const {jobData} = this.state
     const {similarJobs} = jobData
     return similarJobs.map(eachJob => (
-      <li className="job-item">
+      <li className="job-item" key={eachJob.id}>
         <div className="image-heading">
           <img
             src={eachJob.similarJobImage}
@@ -132,7 +132,7 @@ class JobItemDetails extends Component {
           </div>
         </div>
         <div className="description-container">
-          <p className="description">Description</p>
+          <h1 className="description">Description</h1>
           <p className="full-description">{eachJob.similarJobDescription}</p>
         </div>
         <div className="location-type">
@@ -187,7 +187,7 @@ class JobItemDetails extends Component {
           <hr className="line" />
           <div className="description-container">
             <div className="des-page">
-              <p className="description">Description</p>
+              <h1 className="description">Description</h1>
               <p className="link-element">
                 <a
                   href={companyWebsiteUrl}
@@ -200,7 +200,7 @@ class JobItemDetails extends Component {
             </div>
             <p className="full-description">{jobDescription}</p>
           </div>
-          <h1 className="skills-heading">Skills</h1>
+          <h1 className="description">Skills</h1>
           <ul className="skills-list">{this.renderSkillSet()}</ul>
           <h1 className="heading">Life At Company</h1>
           <div className="life-at-company">

@@ -81,4 +81,15 @@
   display: flex;
   flex-direction: column;
   background-color: #000000;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.fail {
+  height: 300px;
+  width: 300px;
+}
+.retry-button {
+  width: 300px;
+  background-color: blue;
 }

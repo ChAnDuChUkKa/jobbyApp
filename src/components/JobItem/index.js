@@ -41,7 +41,7 @@ const JobItem = props => {
         </div>
         <hr className="line" />
         <div className="description-container">
-          <p className="description">Description</p>
+          <h1 className="description">Description</h1>
           <p className="full-description">{jobDescription}</p>
         </div>
       </li>
